@@ -1,0 +1,112 @@
+//modul....................
+ Public Numberofaccount As Integer
+
+    Structure Customertype
+        Dim AccountName As String
+        Dim AccountType As String
+        Dim Withdraw As Integer
+        Dim Deposit As Integer
+        Dim Overdraft As Boolean
+
+    End Structure
+
+    Public Bank(19) As Customertype
+............................................
+//form1 ........
+ Dim index As Integer
+.......................
+//btn exit
+   txtAccountName.Text = ""
+        txtDeposit.Text = ""
+        txtWitthdrawal.Text = ""
+        cbAccountype.Text = ""
+        ChkOverdraft.Text = ""
+ Application.Exit()
+....................
+btncance ? 
+..........
+   txtAccountName.Text = ""
+        txtDeposit.Text = ""
+        txtWitthdrawal.Text = ""
+        cbAccountype.Text = ""
+        ChkOverdraft.Text = ""
+btndispaly
+..........
+  Form2.Show()
+.................
+btnAdd
+..........
+       Bank(index).AccountName = txtAccountName.Text
+        Bank(index).AccountType = cbAccountype.Text
+        Bank(index).Withdraw = txtWitthdrawal.Text
+        Bank(index).Deposit = Val(txtDeposit.Text)
+        Bank(index).Overdraft = ChkOverdraft.Checked
+
+
+        Numberofaccount = Numberofaccount + 1
+        index = index + 1
+
+        txtAccountName.Text = ""
+        txtDeposit.Text = ""
+        txtWitthdrawal.Text = ""
+        cbAccountype.Text = ""
+        ChkOverdraft.Checked = False
+        txtAccountName.Focus()
+.........................................
+form2
+............
+btnnext
+  index = index + 1
+....................
+
+    Public Sub AccountDetials(ByValIndex As Integer)
+        With Bank(index)
+            lblAccountName.Text = .AccountName
+            lblAccountType.Text = .AccountType
+            lblDeposit.Text = .Deposit
+            lblOverdraft.Text = .Overdraft
+            lblWithdrawal.Text = .Withdraw
+            ChkOverdraft.Checked = .Overdraft
+        End With
+    End Sub
+form2 formload
+....................
+ Dim index As Integer
+        btnPrevious.Enabled = False
+        If Numberofaccount = 0 Then
+            btnNext.Enabled = False
+        ElseIf Numberofaccount = 1 Then
+            btnNext.Enabled = False
+            Call AccountDetials(0)
+        Else
+            btnNext.Enabled = True
+
+        End If
+        For index = 0 To Numberofaccount - 1
+            cboAccount.Items.Add(Bank(index).AccountName)
+
+        Next
+............................................
+        AccountDetials(index)
+        btnPrevious.Enabled = True
+......................................
+btnpreveous
+  index = index - 1
+        AccountDetials(index)
+..................................
+
+btncancel
+ lblAccountName.Text = ""
+        lblAccountType.Text = ""
+        lblDeposit.Text = ""
+        lblWithdrawal.Text = ""
+        ChkOverdraft.Checked = False
+....................................
+btnexit
+    Me.Close()
+cbaAccount
+ Dim recodnumber As Integer
+        recodnumber = cboAccount.SelectedIndex
+        Call AccountDetials(recodnumber)
+
+.....................
